@@ -12,7 +12,16 @@
       <ion-title size="large">Photo Gallery</ion-title>
     </ion-toolbar>
   </ion-header>
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+
+  <ion-grid>
+    <ion-row>
+      @for (photo of gallery; track photo.filePath; let position = $index) {
+        <ion-col size="4">
+          <ion-img [src]="photo.webviewPath"></ion-img>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="takePhoto()">

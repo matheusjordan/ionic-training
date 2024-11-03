@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Camera, CameraResultType, CameraSource, Photo} from '@capacitor/camera';
+import {UserPhoto} from "../models/user-photo.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PhotosService {
+  photos: UserPhoto[] = [];
 
   constructor() { }
 
@@ -14,6 +16,10 @@ export class PhotosService {
     if (hasPermission.photos === 'granted') {
       const capturedPhoto = await this.takePhoto();
 
+      this.photos.unshift({
+        filePath: 'processing...',
+        webviewPath: capturedPhoto.webPath!
+      })
     } else {
       await Camera.requestPermissions();
     }
