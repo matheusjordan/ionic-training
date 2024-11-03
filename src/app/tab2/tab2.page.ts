@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {IonHeader, IonToolbar, IonTitle, IonContent, IonFabButton, IonFab, IonIcon} from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import {PhotosService} from "../services/photos.service";
 
 @Component({
   selector: 'app-tab2',
@@ -19,7 +20,11 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
   ]
 })
 export class Tab2Page {
+  private photoService = inject(PhotosService);
 
   constructor() {}
 
+  takePhoto() {
+    this.photoService.newPhotoToGallery();
+  }
 }
