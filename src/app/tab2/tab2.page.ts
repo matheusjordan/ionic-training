@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -37,11 +37,15 @@ import {NgFor} from "@angular/common";
     ExploreContainerComponent
   ]
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
   private photoService = inject(PhotosService);
   gallery = this.photoService.photos;
 
   constructor() {}
+
+  ngOnInit() {
+    this.photoService.loadSaved();
+  }
 
   takePhoto() {
     this.photoService.newPhotoToGallery();
